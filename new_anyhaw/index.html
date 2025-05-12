@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Any-Haw Litson Manok</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <a href="index.html">
+                <img src="assets/images/494329482_1821948808587172_5887155816505874284_n.png" alt="Any-Haw Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="menu.html">MENU</a>
+            <a href="#" id="aboutUsLink">ABOUT US</a>
+            <a href="#" id="loginLink">LOGIN/REGISTER</a>
+            <div class="search-box">
+                <input type="text" placeholder="Search">
+                <span class="search-icon">&#128269;</span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="main-section"></section>
+
+    <!-- Floating About Us UI -->
+    <div id="aboutUsUI" class="floating-ui aboutus-ui" style="display: none;">
+        <div class="floating-aboutus-inner">
+            <div id="aboutUsContent" class="aboutus-content">
+                <p>We are Any-Haw, serving the best Litson Manok in town since 2020!</p>
+            </div>
+            <button class="white-close-btn" id="closeAboutUsBtn">X</button>
+        </div>
+    </div>
+
+    <!-- Dark Background Overlay -->
+    <div id="overlay" class="overlay" style="display: none;"></div>
+
+    <!-- Floating Login UI -->
+    <div id="floatingUI" class="floating-ui" style="display: none;">
+        <div class="floating-inner">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username/Email" required>
+            <div class="password-field">
+                <input type="password" id="password" placeholder="Password" required>
+                <span class="toggle-password" onclick="toggleRegisterPassword()">👁</span>
+            </div>
+            <div class="forgot-password">
+                <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+            </div>
+            <div class="button-group">
+                <button id="loginBtn">Login</button>
+                <button id="guestBtn">Guest Login</button>
+                <button id="switchToRegisterBtn">Switch to Register</button>
+            </div>
+            <button id="closeBtn" class="close-btn">X</button>
+        </div>
+    </div>
+
+    <!-- Guest Login UI -->
+    <div id="guestUI" class="floating-ui" style="display: none;">
+        <div class="floating-inner">
+            <h2>Guest Login</h2>
+            <input type="text" id="guestUsername" placeholder="Username" required>
+            <input type="text" id="guestContact" placeholder="Contact Number" pattern="\d*" maxlength="11" required>
+            <div class="button-group">
+                <button id="guestLoginBtn">Login</button>
+                <button id="backToLoginBtn">Back to Login</button>
+            </div>
+            <button id="guestCloseBtn" class="close-btn">X</button>
+        </div>
+    </div>
+
+    <!-- Register UI -->
+    <div id="registerUI" class="floating-ui" style="display: none;">
+        <div class="floating-inner">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <input type="text" id="registerUsername" name="username" placeholder="Username" required>
+                <input type="email" id="registerEmail" name="email" placeholder="Email" required>
+                <div class="password-field">
+                    <input type="password" id="registerPassword" name="password" placeholder="Password" required>
+                    <span class="toggle-password" onclick="toggleRegisterPassword()">👁</span>
+                </div>
+                <div class="button-group">
+                    <button type="submit" id="registerBtn">Register</button>
+                    <button type="button" id="backToLoginFromRegisterBtn">Back to Login</button>
+                </div>
+            </form>
+            <button id="registerCloseBtn" class="close-btn">X</button>
+        </div>
+    </div>
+
+    <!-- Forgot Password UI -->
+    <div id="forgotPasswordUI" class="floating-ui" style="display: none;">
+        <div class="floating-inner">
+            <h2>Forgot Password</h2>
+            <input type="email" id="forgotEmail" placeholder="Enter your email" required>
+            <div class="button-group">
+                <button id="sendCodeBtn">Send Code</button>
+                <button id="backToLoginFromForgotBtn">Return to Login</button>
+            </div>
+            <button id="forgotCloseBtn" class="close-btn">X</button>
+        </div>
+    </div>
+
+    <!-- Password Recovery UI -->
+    <div id="recoveryUI" class="floating-ui" style="display: none;">
+        <div class="floating-inner">
+            <h2>Password Recovery</h2>
+            <p>Input the code sent to your email inbox to confirm your identity.</p>
+            <input type="text" id="recoveryCode" placeholder="Enter verification code" required>
+            <div class="forgot-password">
+                <a href="#" id="resendCode">Resend Code</a>
+            </div>
+            <div class="button-group">
+                <button id="confirmRecoveryBtn">Confirm</button>
+                <button id="cancelRecoveryBtn">Cancel</button>
+            </div>
+            <button id="recoveryCloseBtn" class="close-btn">X</button>
+        </div>
+    </div>
+
+    <!-- Inline JavaScript -->
+    <script>
+        const show = (id) => {
+            document.getElementById(id).style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        };
+
+        const hide = (id) => {
+            document.getElementById(id).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        };
+
+        document.getElementById('loginLink').addEventListener('click', () => show('floatingUI'));
+        document.getElementById('aboutUsLink').addEventListener('click', () => {
+            document.getElementById('aboutUsUI').style.display = 'block';
+        });
+
+        document.getElementById('closeBtn').addEventListener('click', () => hide('floatingUI'));
+        document.getElementById('closeAboutUsBtn').addEventListener('click', () => document.getElementById('aboutUsUI').style.display = 'none');
+        document.getElementById('guestBtn').addEventListener('click', () => { hide('floatingUI'); show('guestUI'); });
+        document.getElementById('backToLoginBtn').addEventListener('click', () => { hide('guestUI'); show('floatingUI'); });
+        document.getElementById('guestCloseBtn').addEventListener('click', () => hide('guestUI'));
+
+        document.getElementById('switchToRegisterBtn').addEventListener('click', () => { hide('floatingUI'); show('registerUI'); });
+        document.getElementById('backToLoginFromRegisterBtn').addEventListener('click', () => { hide('registerUI'); show('floatingUI'); });
+        document.getElementById('registerCloseBtn').addEventListener('click', () => hide('registerUI'));
+
+        document.getElementById('forgotPasswordLink').addEventListener('click', () => { hide('floatingUI'); show('forgotPasswordUI'); });
+        document.getElementById('backToLoginFromForgotBtn').addEventListener('click', () => { hide('forgotPasswordUI'); show('floatingUI'); });
+        document.getElementById('forgotCloseBtn').addEventListener('click', () => hide('forgotPasswordUI'));
+
+        document.getElementById('cancelRecoveryBtn').addEventListener('click', () => hide('recoveryUI'));
+        document.getElementById('recoveryCloseBtn').addEventListener('click', () => hide('recoveryUI'));
+
+        function toggleRegisterPassword() {
+            const passFields = document.querySelectorAll('input[type="password"]');
+            passFields.forEach(field => {
+                field.type = field.type === 'password' ? 'text' : 'password';
+            });
+        }
+
+        // Register form submission logic
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("registerUsername").value;
+            const email = document.getElementById("registerEmail").value;
+            const password = document.getElementById("registerPassword").value;
+
+            try {
+                const response = await fetch("/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const result = await response.json();
+                alert(result.message);
+
+                if (response.ok) {
+                    document.getElementById("registerForm").reset();
+                    hide('registerUI');
+                    show('floatingUI');
+                }
+            } catch (error) {
+                console.error("Registration failed:", error);
+                alert("Registration failed. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
